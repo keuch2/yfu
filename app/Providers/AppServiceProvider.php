@@ -6,19 +6,18 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
     public function register(): void
     {
-        //
+        $storagePath = "/home/yfuorgpy/storagedir";
+        if (is_dir($storagePath)) {
+            $this->app->useStoragePath($storagePath);
+        }
     }
 
-    /**
-     * Bootstrap any application services.
-     */
     public function boot(): void
     {
-        //
+        if ($this->app->environment("production")) {
+            \Illuminate\Support\Facades\URL::forceScheme("https");
+        }
     }
 }
