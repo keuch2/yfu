@@ -33,7 +33,8 @@ $PHP $APP/artisan migrate --force
 # 4. Clear and rebuild caches
 echo "[4/5] Rebuilding caches..."
 $PHP $APP/artisan config:cache
-$PHP $APP/artisan route:cache
+# NOTE: route:cache breaks subdirectory routing (/app/) - do NOT enable
+$PHP $APP/artisan route:clear
 $PHP $APP/artisan view:cache
 
 # 5. Sync public assets
